@@ -1,4 +1,7 @@
-# Gatsby Starter Netlify Experiments
+# Gatsby Serverless with Identity
+
+A serverless site that uses Netlify Identity and other APIs.
+* see tutorial: `https://www.gatsbyjs.org/blog/2018-12-17-turning-the-static-dynamic/`
 
 ## Get started
 1. clone repo
