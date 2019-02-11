@@ -1,19 +1,31 @@
 import React from "react";
 
 class Sparky extends React.Component {
+  state = {
+    message: "waiting..."
+  };
+
   componentDidMount() {
     fetch("/.netlify/functions/hello")
       .then(response => {
         return response.json();
       })
-      .then(console.log)
+      .then(o => {
+        this.setState({
+          message: o.msg
+        });
+      })
       .catch(e => {
-        console.log(e);
+        this.setState({
+          message: "sorry, there was an error getting the message!"
+        });
       });
   }
 
   render() {
-    return <p>This should put some info in the console...</p>;
+    return (
+      <p>This should put some info in the console: {this.state.message}</p>
+    );
   }
 }
 
