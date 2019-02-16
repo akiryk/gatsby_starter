@@ -18,7 +18,7 @@ class IndexPage extends React.Component {
     fetch("/.netlify/functions/fetch-story")
       .then(response => response.json())
 
-      .then(json => this.setState({ loading: false, msg: json.body }));
+      .then(json => this.setState({ loading: false, msg: json.msg }));
   };
 
   render() {
