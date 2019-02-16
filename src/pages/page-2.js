@@ -1,16 +1,23 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from "react";
+import Layout from "../components/layout";
+import FormClass from "../components/form-class";
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+const handleClick = () => {
+  fetch(`/.netlify/functions/get-post`)
+    .then(res => res.json())
+    .then(json => {
+      alert(`Whoa, ${json.body}`);
+    })
+    .catch(err => {
+      alert("we had an error");
+    });
+};
 
 const SecondPage = () => (
   <Layout>
-    <SEO title="Page two" />
-    <h1>Hi from the second page</h1>
-    <p>Welcome to page 2</p>
-    <Link to="/">Go back to the homepage</Link>
+    <FormClass />
+    <button onClick={handleClick}>Get Post</button>
   </Layout>
-)
+);
 
-export default SecondPage
+export default SecondPage;

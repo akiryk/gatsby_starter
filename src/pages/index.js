@@ -10,12 +10,23 @@ import { initAuth } from "../app/services/auth";
 initAuth();
 
 class IndexPage extends React.Component {
-  state = { loading: false, msg: null };
+  state = {
+    loading: false,
+    msg: null,
+    name: "no name"
+  };
+
+  updateName = e => {
+    this.setState({
+      name: e.target.value
+    });
+  };
+
   handleClick = e => {
     e.preventDefault();
 
     this.setState({ loading: true });
-    fetch("/.netlify/functions/fetch-story")
+    fetch(`/.netlify/functions/fetch-story?name=${this.state.name}`)
       .then(response => response.json())
 
       .then(json => this.setState({ loading: false, msg: json.msg }));
@@ -76,19 +87,23 @@ class IndexPage extends React.Component {
               </li>
             </ul>
             <hr />
+            <label>
+              Give us your name now:{" "}
+              <input type="text" onChange={this.updateName} />
+            </label>
+            <code>{this.state.name}</code>
             <p>
               You can still access Netlify functions even on static "marketing
               pages":{" "}
             </p>
-            <button onClick={this.handleClick}>
-              {loading ? "Loading..." : "Call Lambda Function"}
-            </button>
+            <form onSubmit={this.handleClick}>
+              try this form?
+              <button onClick={this.handleClick}>
+                {loading ? "Loading..." : "Call Lambda Function"}
+              </button>
+            </form>
             <br />
-            <pre>
-              {msg
-                ? "Here is the response: " + msg
-                : "click the button and watch this!"}
-            </pre>
+            <pre>{msg ? msg : "click the button and watch this!"}</pre>
           </div>
           <div
             style={{
