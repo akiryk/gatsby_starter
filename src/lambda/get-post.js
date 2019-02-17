@@ -8,17 +8,9 @@ const client = new faunadb.Client({
 exports.handler = async (event, context, callback) => {
   return client
     .query(q.Get(q.Ref(q.Class("posts"), "224493754100220423")))
-    .then(response => {
-      return callback(null, {
-        statusCode: 200,
-        body: JSON.stringify(response)
-      });
-    })
-    .catch(error => {
-      console.log("error", error);
-      return callback(null, {
-        statusCode: 400,
-        body: JSON.stringify(error)
-      });
-    });
+    .then(response => response.json())
+    .then(data => ({
+      statusCode: 200,
+      body: `you have run out of time... but it worked!`
+    }));
 };
