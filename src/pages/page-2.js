@@ -4,9 +4,14 @@ import FormClass from "../components/form-class";
 
 const handleClick = () => {
   fetch(`/.netlify/functions/get-post`)
-    .then(res => res.json())
+    .then(res => {
+      console.log("first return");
+      console.log(res);
+      return res.json();
+    })
     .then(json => {
-      alert(`Whoa, ${json.body}`);
+      console.log("second return");
+      console.log(json);
     })
     .catch(err => {
       alert("we had an error");
