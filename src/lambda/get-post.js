@@ -5,7 +5,7 @@ const client = new faunadb.Client({
   secret: "fnADHZCWpsACB1sxl5UgB2Vk_W-G3Mi9fbWqBgI9"
 });
 
-exports.handler = (event, context, callback) => {
+exports.handler = async (event, context, callback) => {
   return client
     .query(q.Get(q.Ref(q.Class("posts"), "224493754100220423")))
     .then(response => {
